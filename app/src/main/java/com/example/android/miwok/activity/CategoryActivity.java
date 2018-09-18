@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package com.example.android.miwok;
+package com.example.android.miwok.activity;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -22,77 +23,63 @@ import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.TextView;
 
-public class MainActivity extends AppCompatActivity {
+import com.example.android.miwok.R;
+
+public class CategoryActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        // Set the content of the activity to use the activity_main.xml layout file
-        setContentView(R.layout.activity_main);
-
+        // Set the content of the activity to use the activity_category.xml.xml layout file
+        setContentView(R.layout.activity_category);
         // Find the View that shows the numbers category
-        TextView numbers = (TextView) findViewById(R.id.numbers);
-
-        // Set a click listener on that View
+        TextView numbers = findViewById(R.id.numbers);
         numbers.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link NumbersActivity}
-                Intent numbersIntent = new Intent(MainActivity.this, NumbersActivity.class);
-
-                // Start the new activity
-                startActivity(numbersIntent);
+                openActivity(CategoryActivity.this, NumbersActivity.class);
             }
         });
 
         // Find the View that shows the family category
-        TextView family = (TextView) findViewById(R.id.family);
-
-        // Set a click listener on that View
+        TextView family = findViewById(R.id.family);
         family.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the family category is clicked on.
             @Override
             public void onClick(View view) {
-                // Create a new intent to open the {@link FamilyActivity}
-                Intent familyIntent = new Intent(MainActivity.this, FamilyActivity.class);
-
-                // Start the new activity
-                startActivity(familyIntent);
+                openActivity(CategoryActivity.this, FamilyActivity.class);
             }
         });
 
         // Find the View that shows the colors category
-        TextView colors = (TextView) findViewById(R.id.colors);
-
-        // Set a click listener on that View
+        TextView colors = findViewById(R.id.colors);
         colors.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the colors category is clicked on.
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link ColorsActivity}
-                Intent colorsIntent = new Intent(MainActivity.this, ColorsActivity.class);
-
-                // Start the new activity
-                startActivity(colorsIntent);
+                openActivity(CategoryActivity.this, ColorsActivity.class);
             }
         });
 
         // Find the View that shows the phrases category
-        TextView phrases = (TextView) findViewById(R.id.phrases);
-
-        // Set a click listener on that View
+        TextView phrases = findViewById(R.id.phrases);
         phrases.setOnClickListener(new OnClickListener() {
-            // The code in this method will be executed when the phrases category is clicked on.
             @Override
             public void onClick(View view) {
                 // Create a new intent to open the {@link PhrasesActivity}
-                Intent phrasesIntent = new Intent(MainActivity.this, PhrasesActivity.class);
-
-                // Start the new activity
-                startActivity(phrasesIntent);
+                openActivity(CategoryActivity.this, PhrasesActivity.class);
             }
         });
+    }
+
+    /**
+     * This method will be responsible for opening a new activity
+     *
+     * @param packageContext is the current package for {@link CategoryActivity}
+     * @param cls            is the activity needed to be opened.
+     */
+    private void openActivity(Context packageContext, Class<?> cls) {
+        Intent intent = new Intent(packageContext, cls);
+        startActivity(intent);
     }
 }
