@@ -28,20 +28,15 @@
 
         <TextView
             android:id="@+id/default_word"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
+            style="@style/WordsStyle"
             android:gravity="bottom"
             android:textAppearance="@style/TextAppearance.AppCompat.Headline"
             tools:text="Hello" />
 
         <TextView
             android:id="@+id/miwok_word"
-            style="@style/TextAppearance.AppCompat.Body1"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_weight="1"
-            android:textAlignment="viewStart"
+            style="@style/WordsStyle"
+            android:textAppearance="@style/TextAppearance.AppCompat.Body1"
             tools:text="Miwak Word" />
     </LinearLayout>
 
@@ -57,4 +52,5 @@
         android:contentDescription="@string/play_audio_icon"
         android:scaleType="centerCrop"
         android:src="@drawable/ic_play_circle_outline_black_24dp" />
+
 </RelativeLayout>

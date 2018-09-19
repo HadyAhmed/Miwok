@@ -28,6 +28,7 @@ import com.example.android.miwok.model.Word;
 import java.util.ArrayList;
 
 public class ColorsActivity extends AppCompatActivity {
+    private WordAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +48,7 @@ public class ColorsActivity extends AppCompatActivity {
 
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
-        WordAdapter adapter = new WordAdapter(this, words, R.color.category_colors);
+        adapter = new WordAdapter(this, words, R.color.category_colors);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
@@ -56,5 +57,11 @@ public class ColorsActivity extends AppCompatActivity {
         RecyclerView itemList = findViewById(R.id.item_list_view);
         itemList.setAdapter(adapter);
         itemList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        adapter.releaseMediaPlayer();
     }
 }

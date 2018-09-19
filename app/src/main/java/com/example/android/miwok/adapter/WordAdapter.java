@@ -1,6 +1,7 @@
 package com.example.android.miwok.adapter;
 
 import android.content.Context;
+import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
@@ -11,7 +12,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.android.miwok.R;
 import com.example.android.miwok.model.Word;
@@ -23,11 +23,34 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
     private List<Word> wordList;
     private int colorResourceID;
     private MediaPlayer mediaPlayer;
+    private MediaPlayer.OnCompletionListener completionListener = new MediaPlayer.OnCompletionListener() {
+        @Override
+        public void onCompletion(MediaPlayer mediaPlayer) {
+            releaseMediaPlayer();
+        }
+    };
+    private AudioManager mAudioManager;
+    private AudioManager.OnAudioFocusChangeListener mOnAudioFocusChangeListener = new AudioManager.OnAudioFocusChangeListener() {
+        @Override
+        public void onAudioFocusChange(int focusChange) {
+            if (focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT
+                    || focusChange == AudioManager.AUDIOFOCUS_LOSS_TRANSIENT_CAN_DUCK) {
+                mediaPlayer.pause();
+                mediaPlayer.seekTo(0);// To Hear The Word From The Beginning.
+            } else if (focusChange == AudioManager.AUDIOFOCUS_GAIN) {
+                // Resume Playback
+                mediaPlayer.start();
+            } else if (focusChange == AudioManager.AUDIOFOCUS_LOSS) {
+                releaseMediaPlayer();
+            }
+        }
+    };
 
     public WordAdapter(Context mContext, List<Word> wordList, int colorResourceID) {
         this.mContext = mContext;
         this.wordList = wordList;
         this.colorResourceID = colorResourceID;
+        mAudioManager = (AudioManager) mContext.getSystemService(Context.AUDIO_SERVICE);
     }
 
     @NonNull
@@ -55,8 +78,17 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
         holder.play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                mediaPlayer = MediaPlayer.create(mContext, word.getAudioResourceID());
-                mediaPlayer.start();
+                releaseMediaPlayer();
+                int result = mAudioManager.requestAudioFocus(mOnAudioFocusChangeListener,
+                        // Use the music stream.
+                        AudioManager.STREAM_MUSIC
+                        // Request Permanent Focus.
+                        , AudioManager.AUDIOFOCUS_GAIN_TRANSIENT);
+                if (result == AudioManager.AUDIOFOCUS_REQUEST_GRANTED) {
+                    mediaPlayer = MediaPlayer.create(mContext, word.getAudioResourceID());
+                    mediaPlayer.start();
+                    mediaPlayer.setOnCompletionListener(completionListener);
+                }
             }
         });
     }
@@ -80,6 +112,17 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
             miwokWord = itemView.findViewById(R.id.miwok_word);
             play = itemView.findViewById(R.id.play_btn);
             itemImage = itemView.findViewById(R.id.imageView);
+        }
+    }
+
+    /**
+     * This method will free up the media player resources in the current activity
+     */
+    public void releaseMediaPlayer() {
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+            mAudioManager.abandonAudioFocus(mOnAudioFocusChangeListener);
         }
     }
 }
