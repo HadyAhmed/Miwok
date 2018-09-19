@@ -1,13 +1,14 @@
 package com.example.android.miwok.adapter;
 
 import android.content.Context;
+import android.media.MediaPlayer;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.widget.RecyclerView;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,7 +37,8 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull WordAdapter.ViewHolder holder, int position) {
-        Word word = wordList.get(position);
+        final Word word = wordList.get(position);
+
         holder.wordLayout.setBackgroundColor(ContextCompat.getColor(mContext, colorResourceID));
         holder.defaultWord.setText(word.getDefaultWord());
         holder.miwokWord.setText(word.getMiwokWord());
@@ -46,6 +48,12 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
         } else {
             holder.itemImage.setVisibility(View.GONE);
         }
+        holder.play.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(mContext, "Item: " + word.getDefaultWord() + " was Clicked", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
 
@@ -58,12 +66,14 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
         TextView defaultWord, miwokWord;
         ImageView itemImage;
         View wordLayout;
+        ImageButton play;
 
         ViewHolder(View itemView) {
             super(itemView);
             wordLayout = itemView.findViewById(R.id.word_layout);
             defaultWord = itemView.findViewById(R.id.english_word);
             miwokWord = itemView.findViewById(R.id.miwok_word);
+            play = itemView.findViewById(R.id.play_btn);
             itemImage = itemView.findViewById(R.id.imageView);
         }
     }

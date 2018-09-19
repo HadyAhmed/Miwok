@@ -43,4 +43,17 @@
             android:layout_weight="1"
             tools:text="Miwak Word" />
     </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/play_btn"
+        style="@style/Widget.AppCompat.Button.Borderless.Colored"
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/list_item_height"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentTop="true"
+        android:layout_centerVertical="true"
+        android:layout_marginEnd="8dp"
+        android:contentDescription="@string/play_audio_icon"
+        android:scaleType="centerCrop"
+        android:src="@drawable/ic_play_circle_outline_black_24dp" />
 </RelativeLayout>
