@@ -22,6 +22,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
     private Context mContext;
     private List<Word> wordList;
     private int colorResourceID;
+    private MediaPlayer mediaPlayer;
 
     public WordAdapter(Context mContext, List<Word> wordList, int colorResourceID) {
         this.mContext = mContext;
@@ -38,7 +39,10 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
     @Override
     public void onBindViewHolder(@NonNull WordAdapter.ViewHolder holder, int position) {
         final Word word = wordList.get(position);
-
+        if (mediaPlayer != null) {
+            mediaPlayer.release();
+            mediaPlayer = null;
+        }
         holder.wordLayout.setBackgroundColor(ContextCompat.getColor(mContext, colorResourceID));
         holder.defaultWord.setText(word.getDefaultWord());
         holder.miwokWord.setText(word.getMiwokWord());
@@ -51,7 +55,8 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
         holder.play.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(mContext, "Item: " + word.getDefaultWord() + " was Clicked", Toast.LENGTH_SHORT).show();
+                mediaPlayer = MediaPlayer.create(mContext, word.getAudioResourceID());
+                mediaPlayer.start();
             }
         });
     }
@@ -71,7 +76,7 @@ public class WordAdapter extends RecyclerView.Adapter<WordAdapter.ViewHolder> {
         ViewHolder(View itemView) {
             super(itemView);
             wordLayout = itemView.findViewById(R.id.word_layout);
-            defaultWord = itemView.findViewById(R.id.english_word);
+            defaultWord = itemView.findViewById(R.id.default_word);
             miwokWord = itemView.findViewById(R.id.miwok_word);
             play = itemView.findViewById(R.id.play_btn);
             itemImage = itemView.findViewById(R.id.imageView);

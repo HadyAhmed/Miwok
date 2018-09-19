@@ -27,7 +27,7 @@
         android:paddingStart="8dp">
 
         <TextView
-            android:id="@+id/english_word"
+            android:id="@+id/default_word"
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
@@ -41,6 +41,7 @@
             android:layout_width="match_parent"
             android:layout_height="0dp"
             android:layout_weight="1"
+            android:textAlignment="viewStart"
             tools:text="Miwak Word" />
     </LinearLayout>
 

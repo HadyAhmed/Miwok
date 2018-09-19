@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Miwok</string>
+    <string name="category_phrases">جمل تركيبية</string>
+    <string name="category_colors">الألوان</string>
+    <string name="category_numbers">الأرقام</string>
+    <string name="category_family">أعضاء العائلة</string>
+    <string name="en_color_red">أحمر</string>
+    <string name="en_color_mustard_yellow">أصفر فاتح</string>
+    <string name="en_color_dusty_yellow">أصفر غامق</string>
+    <string name="en_color_green">أخضر</string>
+    <string name="en_color_brown">بنى</string>
+    <string name="en_color_gray">رمادى</string>
+    <string name="en_color_black">اسود</string>
+    <string name="en_color_white">ابيض</string>
+    <string name="en_number_one">واحد</string>
+    <string name="en_number_two">اثنان</string>
+    <string name="en_number_three">ثلاثة</string>
+    <string name="en_number_four">أربعة</string>
+    <string name="en_number_five">خمسة</string>
+    <string name="en_number_six">ستة</string>
+    <string name="en_number_seven">سبعة</string>
+    <string name="en_number_eight">ثمانية</string>
+    <string name="en_number_nine">تسعة</string>
+    <string name="en_number_ten">عشرة</string>
+    <string name="en_phrase_where_are_you_going">أين أنت ذاهب ؟</string>
+    <string name="en_phrase_whats_your_name">ما هو إسمك ؟</string>
+    <string name="en_phrase_my_name_is">إسمي هو…</string>
+    <string name="en_phrase_how_are_you_feeling">كيف تشعر ؟</string>
+    <string name="en_phrase_iam_feeling_good">أنا اشعر بخير</string>
+    <string name="en_phrase_are_you_coming">هل انت قادم ؟</string>
+    <string name="en_phrase_yes_iam_coming">نعم, انا قادم</string>
+    <string name="en_phrase_iam_coming">قادم</string>
+    <string name="en_phrase_lets_go">هيا بنا</string>
+    <string name="en_phrase_come_here">تعال هنا</string>
+</resources>
