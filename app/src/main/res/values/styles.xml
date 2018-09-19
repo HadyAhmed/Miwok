@@ -27,6 +27,8 @@
     </style>
 
     <style name="CategoryTabs" parent="Widget.Design.TabLayout">
+        <item name="tabGravity">fill</item>
+        <item name="tabMaxWidth">0dp</item>
         <item name="tabIndicatorColor">@android:color/white</item>
         <item name="tabBackground">@color/primary_color</item>
         <item name="tabSelectedTextColor">@android:color/white</item>
