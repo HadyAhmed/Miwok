@@ -15,10 +15,11 @@
  */
 package com.example.android.miwok.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.widget.ListView;
-import android.widget.TextView;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.android.miwok.R;
 import com.example.android.miwok.adapter.WordAdapter;
@@ -31,7 +32,7 @@ public class PhrasesActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
+        setContentView(R.layout.word);
 
         // Create a list of words
         ArrayList<Word> words = new ArrayList<Word>();
@@ -54,7 +55,8 @@ public class PhrasesActivity extends AppCompatActivity {
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
         // Find The View That Shows The Item List For The Phrases
-        ListView itemList = findViewById(R.id.item_list_view);
+        RecyclerView itemList = findViewById(R.id.item_list_view);
         itemList.setAdapter(adapter);
+        itemList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
     }
 }

@@ -15,13 +15,11 @@
  */
 package com.example.android.miwok.activity;
 
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.AdapterView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.DividerItemDecoration;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
 import com.example.android.miwok.R;
 import com.example.android.miwok.adapter.WordAdapter;
@@ -34,7 +32,7 @@ public class NumbersActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_content);
+        setContentView(R.layout.word);
 
         // Create a list of words
         final ArrayList<Word> words = new ArrayList<Word>();
@@ -57,13 +55,8 @@ public class NumbersActivity extends AppCompatActivity {
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
 
-        ListView itemList = findViewById(R.id.item_list_view);
+        RecyclerView itemList = findViewById(R.id.item_list_view);
         itemList.setAdapter(adapter);
-        itemList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-            @Override
-            public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
-                Toast.makeText(NumbersActivity.this, "Item: " + words.get(i).getDefaultWord() + " was pressed", Toast.LENGTH_SHORT).show();
-            }
-        });
+        itemList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
     }
 }

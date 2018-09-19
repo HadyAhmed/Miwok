@@ -41,7 +41,6 @@ public class CategoryActivity extends AppCompatActivity {
                 openActivity(CategoryActivity.this, NumbersActivity.class);
             }
         });
-
         // Find the View that shows the family category
         TextView family = findViewById(R.id.family);
         family.setOnClickListener(new OnClickListener() {
@@ -50,7 +49,6 @@ public class CategoryActivity extends AppCompatActivity {
                 openActivity(CategoryActivity.this, FamilyActivity.class);
             }
         });
-
         // Find the View that shows the colors category
         TextView colors = findViewById(R.id.colors);
         colors.setOnClickListener(new OnClickListener() {
@@ -60,7 +58,6 @@ public class CategoryActivity extends AppCompatActivity {
                 openActivity(CategoryActivity.this, ColorsActivity.class);
             }
         });
-
         // Find the View that shows the phrases category
         TextView phrases = findViewById(R.id.phrases);
         phrases.setOnClickListener(new OnClickListener() {
