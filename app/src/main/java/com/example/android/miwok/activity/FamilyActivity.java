@@ -15,11 +15,17 @@
  */
 package com.example.android.miwok.activity;
 
+import android.app.Activity;
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
 
 import com.example.android.miwok.R;
 import com.example.android.miwok.adapter.WordAdapter;
@@ -27,14 +33,13 @@ import com.example.android.miwok.model.Word;
 
 import java.util.ArrayList;
 
-public class FamilyActivity extends AppCompatActivity {
+public class FamilyActivity extends Fragment {
     private WordAdapter adapter;
 
+    @Nullable
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.word);
-
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.word, container, false);
         // Create a list of words
         ArrayList<Word> words = new ArrayList<Word>();
         words.add(new Word("father", "әpә", R.drawable.family_father, R.raw.family_father));
@@ -50,19 +55,22 @@ public class FamilyActivity extends AppCompatActivity {
 
         // Create an {@link WordAdapter}, whose data source is a list of {@link Word}s. The
         // adapter knows how to create list items for each item in the list.
-        adapter = new WordAdapter(this, words, R.color.category_family);
+        Activity activity = getActivity();
+        assert (activity != null);
+        adapter = new WordAdapter(activity, words, R.color.category_family);
 
         // Find the {@link ListView} object in the view hierarchy of the {@link Activity}.
         // There should be a {@link ListView} with the view ID called list, which is declared in the
         // word_list.xml layout file.
         // Find The View That Shows The Item List For The Phrases
-        RecyclerView itemList = findViewById(R.id.item_list_view);
+        RecyclerView itemList = view.findViewById(R.id.item_list_view);
         itemList.setAdapter(adapter);
-        itemList.addItemDecoration(new DividerItemDecoration(this, LinearLayoutManager.VERTICAL));
+        itemList.addItemDecoration(new DividerItemDecoration(activity, LinearLayoutManager.VERTICAL));
+        return view;
     }
 
     @Override
-    protected void onPause() {
+    public void onPause() {
         super.onPause();
         adapter.releaseMediaPlayer();
     }

@@ -25,4 +25,15 @@
         <item name="android:textAlignment">viewStart</item>
         <item name="android:textColor">@android:color/white</item>
     </style>
+
+    <style name="CategoryTabs" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@android:color/white</item>
+        <item name="tabBackground">@color/primary_color</item>
+        <item name="tabSelectedTextColor">@android:color/white</item>
+        <item name="tabTextAppearance">@style/CategoryTabsTextAppearance</item>
+    </style>
+
+    <style name="CategoryTabsTextAppearance" parent="TextAppearance.Design.Tab">
+        <item name="android:textColor">@color/unselected_tab</item>
+    </style>
 </resources>
